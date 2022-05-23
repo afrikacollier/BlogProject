@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Blog site</title>
+		<th:block th:replace="/fragments/head"/>
+	</head>
+	<body>
+		<div class="container">
+			<div th:replace="/fragments/navbar::navbarx"></div>
+			<h1>Create a New Blog Post</h1>
+			<h3>Check out our blogs</h3>
+			
+			<!-- If You surround a URL with @{} in a thymeleag expression,
+			you let thymeleaf have a crack at
+			URL rewriting -->
+			<p>Please use the form below to submit a Blog Post:</p>
+			<form th:action="@{/blogposts}" th:object="${blogPost}" method="post">
+					<div class="form-group">	
+						<input type="text" class="form-control" th:field="*{title}" placeholder="Blog Title..."/>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" th:field="*{author}" placeholder="Your Name Here..."/>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" th:field="*{blogEntry}" placeholder="Blog Entry"/>
+					</div>
+					<button class="btn btn-primary">Submit Your Post</button>
+				
+			</form>
+		</div>
+		<th:block th:replace="/fragments/endbody"/>
+	</body>
+</html>

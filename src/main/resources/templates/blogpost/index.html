@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Blog site</title>
+		<th:block th:replace="/fragments/head"/>
+	</head>
+	<body>
+	  <div th:replace="/fragments/navbar::navbarx"></div>
+		<div class="container">
+			<h1>Welcome to Our Blog Post Site!</h1>
+			<h3>Check out our blogs</h3>
+			<div class="row">
+				<!-- We want to display a list of all our blog posts.... -->
+				<!-- Our blogrposts are stored in a thymeleaf variable called -->
+				<!-- "posts" -->
+				<!-- We are going to create a div that represents how we are going -->
+				<!-- to display each blog post...and we are going to use th:each -->
+				<!-- to repeate that div over and over again for each blogpost.
+					 th: each kinda works like an enhanced for loop.
+				 -->
+				 <div th:each="blog:${posts}">
+				 	<div class="col-md-6">
+				 		<div class="panel panel-default">
+				 			<div class="panel-heading">
+				 				<p th:text="${blog.title}"/>
+				 			</div>
+				 			<div class="panel-body">
+				 				<p th:text="${blog.author}"/>
+				 				<p th:text="${blog.blogEntry}"/>
+				 			</div>
+				 			<div class="panel-footer">
+								   <a th:href="@{/blogposts/{id}(id=${blog.id})}">
+									<button class="btn btn-light">Edit Post</button>
+								</a> 
+				 				
+				 				 <a th:href="@{/blogposts/delete/{id}(id=${blog.id})}">
+									<button class="btn btn-danger">Delete Post</button>
+								</a>
+				 			</div>
+				 		</div>
+				 	</div>
+				 </div>
+			
+			</div>
+			
+			<!-- If You surround a URL with @{} in a thymeleaf expression,
+			you let thymeleaf have a crack at
+			URL rewriting -->
+			<a th:href="@{blogposts/new}">
+				<button class="btn btn-primary">Submit a New Blog Post</button>
+			</a>
+		</div>
+		<th:block th:replace="/fragments/endbody"/>
+	</body>
+</html>
